@@ -200,10 +200,15 @@ int main()
         "img_sch_f9.bmp",
         "img_sch_f10.bmp"
     };
-    for(currentImage = 0; currentImage < NUMBER_OF_IMAGES; currentImage++)
+    #pragma omp scheduled (guided)
     {
-        printf("Imagen %d\n", currentImage+1);
-        processImages(nameOfImages[currentImage], nameOfNewImages[currentImage]);
-    }*
+        #pragma omp for
+    	for(currentImage = 0; currentImage < NUMBER_OF_IMAGES; currentImage++)
+	    {
+	        printf("Imagen %d\n", currentImage+1);
+	        processImages(nameOfImages[currentImage], nameOfNewImages[currentImage]);
+	    }
+    }
+    
     return 0;
 }

@@ -355,10 +355,58 @@ int main()
         "img_sec_f9.bmp",
         "img_sec_f10.bmp"
     };
-    for(currentImage = 0; currentImage < NUMBER_OF_IMAGES; currentImage++)
+    #pragma omp parallel sections num_threads(4) shared (my_arr,arr_in)
     {
-        printf("Imagen %d\n", currentImage+1);
-        processImages(nameOfImages[currentImage], nameOfNewImages[currentImage]);
-    }
+         #pragma sections
+         {
+         	printf("Imagen %d\n", 1);
+        	processImages(nameOfImages[0], nameOfNewImages[0]);
+         }
+         #pragma sections
+         {
+         	printf("Imagen %d\n", 2);
+        	processImages(nameOfImages[1], nameOfNewImages[1]);
+         }
+         #pragma sections
+         {
+         	printf("Imagen %d\n", 3);
+        	processImages(nameOfImages[2], nameOfNewImages[2]);
+         }
+         #pragma sections
+         {
+         	printf("Imagen %d\n", 4);
+        	processImages(nameOfImages[3], nameOfNewImages[3]);
+         }
+         #pragma sections
+         {
+         	printf("Imagen %d\n", 5);
+        	processImages(nameOfImages[4], nameOfNewImages[4]);
+         }
+         #pragma sections
+         {
+         	printf("Imagen %d\n", 6);
+        	processImages(nameOfImages[5], nameOfNewImages[5]);
+         }
+         #pragma sections
+         {
+         	printf("Imagen %d\n", 7);
+        	processImages(nameOfImages[6], nameOfNewImages[6]);
+         }
+         #pragma sections
+         {
+         	printf("Imagen %d\n", 8);
+        	processImages(nameOfImages[7], nameOfNewImages[7]);
+         }
+         #pragma sections
+         {
+         	printf("Imagen %d\n", 9);
+        	processImages(nameOfImages[8], nameOfNewImages[8]);
+         }
+         #pragma sections
+         {
+         	printf("Imagen %d\n", 10);
+        	processImages(nameOfImages[9], nameOfNewImages[9]);
+         }
+     }
     return 0;
 }
